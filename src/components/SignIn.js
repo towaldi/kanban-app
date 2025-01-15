@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { Link } from 'react-router-dom';
 // Style
 import './AuthForm.css';
 
@@ -15,6 +16,8 @@ export default function SignIn() {
         try {
             await signInWithEmailAndPassword(auth, email, password);
             alert("User successfully logged in!");
+            setEmail("");
+            setPassword("");
         } catch (error) {
             setError(error.message);
         }
@@ -50,7 +53,7 @@ export default function SignIn() {
                         <label>Remember me</label>
                     </div>
                     <button type="submit">Sign In</button>
-                    <p>Don't have an account? <a href="/">Sign up</a></p>
+                    <p>Don't have an account? <Link to="/signup">Sign up</Link></p>
                 </form>
             </div>
         </div>

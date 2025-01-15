@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { Link } from "react-router-dom";
 // Style
 import "./AuthForm.css"
 
@@ -15,6 +16,8 @@ export default function SignUp() {
         try {
             await createUserWithEmailAndPassword(auth, email, password);
             alert("User successfully logged in!")
+            setEmail("");
+            setPassword("");
         } catch (error) {
             setError(error.message);
         }
@@ -44,7 +47,7 @@ export default function SignUp() {
                         required
                     />
                     <button type="submit">Sign Up</button>
-                    <p>Have an account? <a href="/">Sign in</a></p>
+                    <p>Have an account? <Link to="/">Sign in</Link></p>
                 </form>
             </div>
         </div>
