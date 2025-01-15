@@ -17,5 +17,13 @@
 }
 
 .sign-components {
+
     gap: 2rem;
+}
+
+.remember-me {
+    /* Display & box model */
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
 }
