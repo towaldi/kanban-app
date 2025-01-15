@@ -1,0 +1,21 @@
+.sign-container {
+    /* Display & box model */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.sign-components,
+.sign-form {
+    /* Display & box model */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.sign-components {
+    gap: 2rem;
+}
