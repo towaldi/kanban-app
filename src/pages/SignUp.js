@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { Link } from "react-router-dom";
+// Components
+import Button from "../components/Button/Button";
+import Input from "../components/Input/Input";
 // Style
 import "./AuthForm.css"
 
@@ -32,22 +35,27 @@ export default function SignUp() {
                 </div>
                 {error && <p style={{ color: "red" }}>{error}</p>}
                 <form onSubmit={handleSignUp} className="sign-form">
-                    <input
-                        type="email"
-                        placeholder="Email"
+                    <Input
+                        label="Email"
+                        type="text"
+                        placeholder="Enter your email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
-                    <input
+                    <Input
+                        label="Password"
                         type="password"
-                        placeholder="Password"
+                        placeholder="Enter your password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
-                    <button type="submit">Sign Up</button>
-                    <p>Have an account? <Link to="/">Sign in</Link></p>
+                    <Button
+                        type="submit"
+                        label="Sign Up"
+                    />
+                    <p className="body-small">Have an account? <Link to="/" className="link">Sign in</Link></p>
                 </form>
             </div>
         </div>

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { Link } from 'react-router-dom';
+// Components
+import Button from "../components/Button/Button";
+import Input from "../components/Input/Input";
 // Style
 import './AuthForm.css';
 
@@ -32,28 +35,33 @@ export default function SignIn() {
                 </div>
                 {error && <p style={{ color: "red" }}>{error}</p>}
                 <form onSubmit={handleSignIn} className="sign-form">
-                    <input
-                        type="email"
-                        placeholder="Email"
+                    <Input
+                        label="Email"
+                        type="text"
+                        placeholder="Enter your email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
-                    <input
+                    <Input
+                        label="Password"
                         type="password"
-                        placeholder="Password"
+                        placeholder="Enter your password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
-                    <div className="remember-me">
+                    <label className="remember-me">
                         <input 
                             type="checkbox"
                         />
-                        <label>Remember me</label>
-                    </div>
-                    <button type="submit">Sign In</button>
-                    <p>Don't have an account? <Link to="/signup">Sign up</Link></p>
+                        <span>Remember me</span>
+                    </label>
+                    <Button
+                        type="submit"
+                        label="Sign in"
+                    />
+                    <p className="body-small">Don't have an account? <Link to="/signup" className="link">Sign up</Link></p>
                 </form>
             </div>
         </div>
