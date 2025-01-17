@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 // Components
-import Button from "../components/Button/Button";
-import Input from "../components/Input/Input";
+import Button from "../../components/Button/Button";
+import Input from "../../components/Input/Input";
 // Style
 import './AuthForm.css';
 
@@ -11,6 +11,7 @@ export default function SignIn() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const navigate = useNavigate();
 
     const handleSignIn = async (e) => {
         e.preventDefault();
@@ -21,6 +22,7 @@ export default function SignIn() {
             alert("User successfully logged in!");
             setEmail("");
             setPassword("");
+            navigate("/summary");
         } catch (error) {
             setError(error.message);
         }
@@ -61,7 +63,9 @@ export default function SignIn() {
                         type="submit"
                         label="Sign in"
                     />
-                    <p className="body-small">Don't have an account? <Link to="/signup" className="link">Sign up</Link></p>
+                    <p className="body-small">Don't have an account?
+                        <Link to="/signup" className="link">Sign up</Link>
+                    </p>
                 </form>
             </div>
         </div>

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { Link } from "react-router-dom";
 // Components
-import Button from "../components/Button/Button";
-import Input from "../components/Input/Input";
+import Button from "../../components/Button/Button";
+import Input from "../../components/Input/Input";
 // Style
 import "./AuthForm.css"
 
