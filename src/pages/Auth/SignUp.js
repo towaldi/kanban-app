@@ -29,7 +29,7 @@ export default function SignUp() {
         e.preventDefault();
         const auth = getAuth();
 
-        // Trigger validation for emailand password
+        // Trigger validation for email and password
         const emailError = validateEmail(email);
         const passwordError = validatePassword(password);
 
