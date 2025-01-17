@@ -64,7 +64,7 @@ export default function SignIn() {
                         label="Sign in"
                     />
                     <p className="body-small">Don't have an account?
-                        <Link to="/signup" className="link">Sign up</Link>
+                        <Link to="/signup" className="link"> Sign up</Link>
                     </p>
                 </form>
             </div>

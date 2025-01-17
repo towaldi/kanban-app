@@ -7,6 +7,19 @@ import Input from "../../components/Input/Input";
 // Style
 import "./AuthForm.css"
 
+// Validation functions (placed outside the component)
+const validateEmail = (email) => {
+    if (!email) return "Email is required.";
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email) ? "" : "Please enter a valid email address.";
+};
+
+const validatePassword = (password) => {
+    if (!password) return "Password is required.";
+    if (password.length < 6) return "Password should be at least 6 characters.";
+    return "";
+};
+
 export default function SignUp() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -15,6 +28,15 @@ export default function SignUp() {
     const handleSignUp = async (e) => {
         e.preventDefault();
         const auth = getAuth();
+
+        // Trigger validation for emailand password
+        const emailError = validateEmail(email);
+        const passwordError = validatePassword(password);
+
+        if (emailError || passwordError) {
+            setError(emailError || passwordError);  // Display the first error found
+            return;
+        }
 
         try {
             await createUserWithEmailAndPassword(auth, email, password);
@@ -33,7 +55,7 @@ export default function SignUp() {
                     <h1>Sign Up</h1>
                     <h2>Create a new account</h2>
                 </div>
-                {error && <p style={{ color: "red" }}>{error}</p>}
+                {/*{error && <p style={{ color: "red" }}>{error}</p>} */}
                 <form onSubmit={handleSignUp} className="sign-form">
                     <Input
                         label="Email"
@@ -41,6 +63,7 @@ export default function SignUp() {
                         placeholder="Enter your email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        validate={validateEmail}    // Pass validation function to Input
                         required
                     />
                     <Input
@@ -49,13 +72,16 @@ export default function SignUp() {
                         placeholder="Enter your password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        validate={validatePassword} // Pass validation function to Input
                         required
                     />
                     <Button
                         type="submit"
                         label="Sign Up"
                     />
-                    <p className="body-small">Have an account? <Link to="/" className="link">Sign in</Link></p>
+                    <p className="body-small">Have an account? 
+                        <Link to="/" className="link"> Sign in</Link>
+                    </p>
                 </form>
             </div>
         </div>
