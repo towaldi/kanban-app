@@ -6,14 +6,21 @@
     align-items: center;
     padding: .625rem 1rem;
     /* Other */
-    background-color: var(--brand-500);
     border: none;
     border-radius: .5rem;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 
                 0 1px 2px rgba(0,0,0,0.24);
     color: #fff;
     cursor: pointer;
-    font-family: 'Inter';
-    font-size: .875rem;
-    font-weight: 700;
+    transition: all .2s ease-in-out;
+}
+
+.btn-primary {
+    /* Other */
+    background-color: var(--brand-500);
+}
+
+.btn-primary:hover {
+    /* Other */
+    background-color: var(--brand-700);
 }

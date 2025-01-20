@@ -2,8 +2,9 @@ import React from 'react';
 import { getAuth, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 // Components
-import Navbar from '../../components/Navbar/Navbar';
+
 // Style
+import '../../App.css';
 import './Summary.css';
 
 export default function Summary() {
@@ -23,13 +24,10 @@ export default function Summary() {
 
     return (
         <div>
-            <Navbar />
-            <div className='app-bar'>
-                <button onClick={handleLogout}>Logout</button>
-            </div>
-            <main>
-
-            </main>
+            {/*c<div className='app-bar'>
+                <button onClick={handleLogout} className='btn btn-primary'>Logout</button>
+            </div> */}
+            <p>Summary</p>
         </div>
     )
 }

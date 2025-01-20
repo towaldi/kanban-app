@@ -4,7 +4,22 @@
     width: 100vw;
 }
 
-h1, h2, p, label, .link {
+.content-container {
+  /* Display & box model */
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.main {
+  /* Display & box model */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+h1, h2, p, label, .btn, .link, a {
   font-family: 'Inter';
   color: var(--gray-900);
 }
@@ -24,6 +39,18 @@ p {
   font-weight: 400;
   font-size: 1rem;
   color: var(--gray-600);
+  text-decoration: none;
+}
+
+.btn {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--color-white);
+}
+
+.title-medium {
+  font-weight: 500;
+  font-size: 1rem;
 }
 
 .body-small {
@@ -44,5 +71,9 @@ label {
 .link {
   font-weight: 600;
   color: var(--brand-500);
+  text-decoration: none;
+}
+
+a {
   text-decoration: none;
 }

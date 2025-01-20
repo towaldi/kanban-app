@@ -1,0 +1,17 @@
+.link {
+    text-decoration: none;
+    color: var(--gray-600);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s ease;
+  }
+  
+  .link.active {
+    color: var(--brand-500);
+    font-weight: 700;
+  }
+  
+  .list-item {
+    list-style: none;
+  }

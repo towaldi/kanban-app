@@ -1,0 +1,29 @@
+.navbar {
+    /* Display & box model */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+    width: fit-content;
+    /* Other */
+    border-right: .063rem solid var(--gray-100);
+}
+
+.navbar ul {
+    /* Display & box model */
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    /* Other */
+    list-style: none;
+}
+
+.navbar li.active {
+    /* Other */
+    background-color: var(--gray-100);
+}
+
+.navbar li:hover {
+    /* Other */
+    background-color: var(--gray-50);
+}

@@ -1,0 +1,11 @@
+.app-bar {
+    /* Display & box model */
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+    padding: 1rem;
+    width: 100%;
+    /* Other */
+    border-bottom: .063rem solid var(--gray-100);
+}
