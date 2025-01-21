@@ -1,3 +1,21 @@
+.logo {
+    /* Display & box model */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    padding: .5rem 0 1rem 0;
+}
+
+.logo-icon {
+    /* Display & box model */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2rem;
+    width: 2rem;
+}
+
 .navbar {
     /* Display & box model */
     display: flex;

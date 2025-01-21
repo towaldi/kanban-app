@@ -2,6 +2,7 @@ import React from 'react';
 // Components
 import ListItem from '../ListItem/ListItem';
 import { Columns3, Contact, LayoutDashboard, Section, Shield, StickyNote } from 'lucide-react';
+import palantirLogo from '../../assets/palantir.png';
 // Style
 import './Navbar.css';
 
@@ -9,6 +10,10 @@ export default function Navbar() {
   return (
     <nav className='navbar'>
         <ul className='list-items'>
+            <div className='logo'>
+                <img className='logo-icon' src={palantirLogo} alt='Logo'/>
+                <h2>Kanban App</h2>
+            </div>
             <ListItem
                 icon={LayoutDashboard}
                 label="Summary"

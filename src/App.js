@@ -33,7 +33,7 @@ export default function App() {
               <Route path="/add-task" element={<AddTask />} />
               <Route path="/board" element={<Board />} />
               <Route path="/contacts" element={<Contacts />} />
-              <Route path="/privay" element={<Privacy />} />
+              <Route path="/privacy" element={<Privacy />} />
               <Route path="/legal-notice" element={<LegalNotice />} />
             </Routes>
           </div>
