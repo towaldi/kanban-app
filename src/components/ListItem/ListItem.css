@@ -1,6 +1,8 @@
 .list-item {
     /* Display & box model */
     width: 10rem;
+    /* Other */
+    list-style: none;
 }
 
 .list-item-link {

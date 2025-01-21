@@ -1,0 +1,17 @@
+.menu {
+    /* Display & box model */
+    position: fixed;
+    top: 3.5rem;
+    right: 1rem;
+    display: flex;
+    flex-direction: column;
+    padding: .5rem;
+    width: fit-content;
+    z-index: 1;
+    /* Other */
+    background-color: var(--color-white);
+    border: .063rem solid var(--gray-100);
+    border-radius: .5rem;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 
+                0 6px 6px rgba(0,0,0,0.23);   
+}

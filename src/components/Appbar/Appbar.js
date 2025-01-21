@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 // Components
-import Button from '../Button/Button';
+import Avatar from '../Avatar/Avatar';
+import Menu from '../Menu/Menu';
 // Style
 import './Appbar.css';
 
 
 export default function Appbar() {
+
   return (
     <div className='app-bar'>
-      <Button
-        label="Logout"
-      />
+      <Avatar />
     </div>
   )
 }

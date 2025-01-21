@@ -2,7 +2,7 @@ import React from 'react';
 import { getAuth, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 // Components
-
+import Menu from '../../components/Menu/Menu';
 // Style
 import '../../App.css';
 import './Summary.css';

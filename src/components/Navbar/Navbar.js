@@ -1,7 +1,7 @@
 import React from 'react';
+import { Columns3, Contact, LayoutDashboard, Section, Shield, StickyNote } from 'lucide-react';
 // Components
 import ListItem from '../ListItem/ListItem';
-import { Columns3, Contact, LayoutDashboard, Section, Shield, StickyNote } from 'lucide-react';
 import palantirLogo from '../../assets/palantir.png';
 // Style
 import './Navbar.css';
