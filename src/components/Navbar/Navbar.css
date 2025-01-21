@@ -9,21 +9,11 @@
     border-right: .063rem solid var(--gray-100);
 }
 
-.navbar ul {
+.list-items {
     /* Display & box model */
     display: flex;
     flex-direction: column;
     width: fit-content;
     /* Other */
     list-style: none;
-}
-
-.navbar li.active {
-    /* Other */
-    background-color: var(--gray-100);
-}
-
-.navbar li:hover {
-    /* Other */
-    background-color: var(--gray-50);
 }

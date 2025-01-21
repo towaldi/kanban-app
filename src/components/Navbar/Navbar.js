@@ -10,34 +10,34 @@ export default function Navbar() {
     <nav className='navbar'>
         <ul className='list-items'>
             <ListItem
-                icon={<LayoutDashboard color={"var(--gray-600)"} size={20}/>}
+                icon={LayoutDashboard}
                 label="Summary"
                 to="/summary" 
             />
             <ListItem
-                icon={<StickyNote color={"var(--gray-600)"} size={20}/>}
+                icon={StickyNote}
                 label="Add Task"
                 to="/add-task" 
             />
             <ListItem
-                icon={<Columns3 color={"var(--gray-600)"} size={20}/>}
+                icon={Columns3}
                 label="Board"
                 to="/board" 
             />
             <ListItem 
-                icon={<Contact color={"var(--gray-600)"} size={20}/>}
+                icon={Contact}
                 label="Contacts"
                 to="/contacts"
             />
         </ul>
         <ul className='list-items'>
             <ListItem 
-                icon={<Shield color={"var(--gray-600)"} size={20}/>}
+                icon={Shield}
                 label="Privacy"
                 to="/privacy"
             />
             <ListItem 
-                icon={<Section color={"var(--gray-600)"} size={20}/>}
+                icon={Section}
                 label="Legal notice"
                 to="/legal-notice"
             />

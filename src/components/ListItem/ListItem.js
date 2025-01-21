@@ -3,15 +3,18 @@ import { NavLink } from 'react-router-dom';
 // Style
 import './ListItem.css';
 
-export default function ListItem({ icon, label, to }) {
+export default function ListItem({ icon: Icon, label, to }) {
   return (
     <li className='list-item'>
-      <NavLink
+      <NavLink 
         to={to}
-        className={({ isActive }) => (isActive ? 'link active' : 'link')}
+        className={({isActive}) => `list-item-link ${isActive ? "active" : ""}`}
       >
-        <span>{icon}</span>
-        <p>{label}</p>
+        <Icon 
+          className="icon"
+          size={20}
+        />
+        <p className='list-item-label'>{label}</p>
       </NavLink>
     </li>
   );
