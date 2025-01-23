@@ -22,8 +22,11 @@ export default function LogoutButton({ icon: Icon, label }) {
 
   return (
     <button className="logout-button" onClick={handleLogout}>
-      {<Icon size={20} />}
-      {label}
+        {<Icon
+            className="icon"
+            size={20} 
+        />}
+        <p>{label}</p>
     </button>
   );
 }

@@ -7,5 +7,15 @@
     padding: .5rem;
     width: 10rem;
     /* Other */
+    background-color: transparent;
+    border: none;
+    border-radius: .5rem;
+    cursor: pointer;
     list-style: none;
+    transition: all .1s ease-in-out;
+}
+
+.logout-button:hover {
+    /* Other */
+    background-color: var(--gray-100);
 }
