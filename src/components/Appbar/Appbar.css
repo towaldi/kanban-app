@@ -2,10 +2,18 @@
     /* Display & box model */
     display: flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: space-between;
     align-items: center;
     padding: 1rem;
     width: 100%;
     /* Other */
     border-bottom: .063rem solid var(--gray-100);
+}
+
+.app-bar-controls {
+    /* Display & box model */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: .5rem;
 }

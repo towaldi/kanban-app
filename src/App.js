@@ -19,6 +19,7 @@ import './App.css';
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isNavbarVisible, setIsNavbarVisible] = useState(true);
 
   useEffect(() => {
     const auth = getAuth();
@@ -30,6 +31,10 @@ export default function App() {
     return () => unsubscribe();
   }, []);
 
+  const toggleNavbar = () => {
+    setIsNavbarVisible((prev) => !prev);
+  };
+
   console.log("Firebase app initialized:", app);
 
   return (
@@ -38,9 +43,9 @@ export default function App() {
         {/* Show Navbar and Appbar only if authenticated */}
         {isAuthenticated && (
           <div className='content-container'>
-            <Navbar />
+            {isNavbarVisible && <Navbar />}
             <div className='main'>
-              <Appbar />
+              <Appbar toggleNavbar={toggleNavbar} isNavbarVisible={isNavbarVisible}/>
               <Routes>
                 <Route path="/summary" element={<Summary />} />
                 <Route path="/add-task" element={<AddTask />} />
