@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import app from './firebase';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // Components
 import SignIn from './pages/Auth/SignIn';
@@ -17,27 +18,48 @@ import './App.css';
 
 
 export default function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const auth = getAuth();
+    // Check auth state only once on app mount
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setIsAuthenticated(!!user);
+    });
+    // Cleanup the listener on unmount
+    return () => unsubscribe();
+  }, []);
+
   console.log("Firebase app initialized:", app);
 
   return (
     <Router>
       <div className='app'>
-        <div className='content-container'>
-          <Navbar />
-          <div className='main'>
-            <Appbar />
-            <Routes>
-              <Route path="/" element={<SignIn />} />
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/summary" element={<Summary />} />
-              <Route path="/add-task" element={<AddTask />} />
-              <Route path="/board" element={<Board />} />
-              <Route path="/contacts" element={<Contacts />} />
-              <Route path="/privacy" element={<Privacy />} />
-              <Route path="/legal-notice" element={<LegalNotice />} />
-            </Routes>
+        {/* Show Navbar and Appbar only if authenticated */}
+        {isAuthenticated && (
+          <div className='content-container'>
+            <Navbar />
+            <div className='main'>
+              <Appbar />
+              <Routes>
+                <Route path="/summary" element={<Summary />} />
+                <Route path="/add-task" element={<AddTask />} />
+                <Route path="/board" element={<Board />} />
+                <Route path="/contacts" element={<Contacts />} />
+                <Route path="/privacy" element={<Privacy />} />
+                <Route path="/legal-notice" element={<LegalNotice />} />
+              </Routes>
+            </div>
           </div>
-        </div>
+        )}
+
+        {/* Unauthenticated users only see SignIn/SignUp */}
+        {!isAuthenticated && (
+          <Routes>
+            <Route path="/" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+          </Routes>
+        )}
       </div>
     </Router>
   );

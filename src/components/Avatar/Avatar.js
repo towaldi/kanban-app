@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
-// Components
+// Component
 import Menu from '../Menu/Menu';
 // Style
 import './Avatar.css';
 
 export default function Avatar() {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    const toggleMenu = () => {
-        setIsMenuOpen((prevState) => !prevState);
-    }
+  const toggleMenu = () => {
+    setIsMenuOpen((prevState) => !prevState);
+  };
 
-    return (
-        <div className='avatar-container'>
-            <button className='avatar'>
-                <p onClick={toggleMenu}>OP</p>
-            </button>
-            {isMenuOpen && <Menu />}
-        </div>
-  )
+  return (
+    <div className="avatar-container">
+      <button className="avatar" onClick={toggleMenu}>
+        <p>OP</p>
+      </button>
+      {isMenuOpen && <Menu />}
+    </div>
+  );
 }

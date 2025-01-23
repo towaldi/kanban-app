@@ -4,8 +4,8 @@ import './IconButton.css';
 
 export default function IconButton() {
   return (
-    <button className='icon-button'>
-        
+    <button className=''>
+        Logout
     </button>
   )
 }

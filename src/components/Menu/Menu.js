@@ -1,23 +1,15 @@
 import React from 'react';
-import { LogOut, CircleUser } from 'lucide-react';
+import { LogOut } from 'lucide-react';
 // Components
-import ListItem from '../ListItem/ListItem';
+import LogoutButton from '../Button/LogoutButton';
 // Style
 import './Menu.css';
 
 export default function Menu() {
   return (
-    <div className='menu'>
-        <ListItem 
-            icon={LogOut}
-            label="Logout"
-            to="/signin"
-        />
-        <ListItem
-            icon={CircleUser}
-            label="Profile"
-            to="/profile"
-        />
+    <div className="menu">
+      {/* Pass LogOut as a component reference */}
+      <LogoutButton icon={LogOut} label="Logout" />
     </div>
-  )
+  );
 }
