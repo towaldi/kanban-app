@@ -11,12 +11,17 @@
   height: 100%;
 }
 
-.main {
+.main, .workspace {
   /* Display & box model */
   display: flex;
   flex-direction: column;
   height: 100%;
   width: 100%;
+}
+
+.workspace {
+  /* Display & box model */
+  padding: 2rem;
 }
 
 h1, h2, p, label, .btn, .link, a {
@@ -30,7 +35,7 @@ h1 {
 }
 
 h2 {
-  font-weight: 400;
+  font-weight: 600;
   font-size: 1rem;
   color: var(--gray-600);
 }

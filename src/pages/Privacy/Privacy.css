@@ -1,0 +1,8 @@
+.section {
+    /* Display & box model */
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    padding-top: 1rem;
+    /* Other */
+}
