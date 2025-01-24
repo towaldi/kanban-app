@@ -35,7 +35,7 @@ export default function App() {
     setIsNavbarVisible((prev) => !prev);
   };
 
-  console.log("Firebase app initialized:", app);
+  {/*console.log("Firebase app initialized:", app);*/}
 
   return (
     <Router>
