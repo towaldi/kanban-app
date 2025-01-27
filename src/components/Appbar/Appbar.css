@@ -1,5 +1,8 @@
 .app-bar {
     /* Display & box model */
+    position: sticky;
+    top: 0;
+    right: 0;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -7,6 +10,7 @@
     padding: 1rem;
     width: 100%;
     /* Other */
+    background-color: var(--color-white);
     border-bottom: .063rem solid var(--gray-100);
 }
 

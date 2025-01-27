@@ -1,3 +1,27 @@
+.navbar {
+    /* Display & box model */
+    position: sticky;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+    height: 100%;
+    width: fit-content;
+    /* Other */
+    background-color: var(--color-white);
+    border-right: .063rem solid var(--gray-100);
+}
+
+.list-items {
+    /* Display & box model */
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+}
+
 .logo {
     /* Display & box model */
     display: flex;
@@ -14,22 +38,4 @@
     align-items: center;
     height: 2rem;
     width: 2rem;
-}
-
-.navbar {
-    /* Display & box model */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 1rem;
-    width: fit-content;
-    /* Other */
-    border-right: .063rem solid var(--gray-100);
-}
-
-.list-items {
-    /* Display & box model */
-    display: flex;
-    flex-direction: column;
-    width: fit-content;
 }

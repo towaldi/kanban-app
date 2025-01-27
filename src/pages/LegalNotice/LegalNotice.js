@@ -25,7 +25,7 @@ export default function LegalNotice() {
             We, the listed students, may update or change the terms and conditions from time to time without notice.</p>
         </div>
         <div className='section'>
-          <h2>Acceptance of terms</h2>
+          <h2>Scope and ownership of the product</h2>
           <p>Join has been developed as part of a student group project in a web development bootcamp at the Developer Akademie GmbH. 
             It has an educational purpose and is not intended for extensive personal & business usage. 
             As such, we cannot guarantee consistent availability, reliability, accuracy, or any other aspect of quality regarding this Product.
