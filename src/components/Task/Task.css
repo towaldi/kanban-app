@@ -1,0 +1,19 @@
+.task {
+    /* Display & box model */
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: .5rem;
+    /* Other */
+    background-color: var(--color-white);
+    border: .063rem solid var(--gray-100);
+    border-radius: .5rem;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+}
+
+.task:hover {
+    /* Display & box model */
+    box-shadow: 0 2px 8px rgba(0,0,0,.1), 
+                0 2px 8px rgba(0,0,0,.1);
+}

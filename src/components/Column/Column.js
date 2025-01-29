@@ -10,7 +10,13 @@ export default function Column({ title, tasks }) {
             <h2>{title}</h2>
             <div className='column-bgr'>
                 {tasks.map((task) => (
-                    <Task key={task.id} title={task.title}/>
+                    <Task 
+                        key={task.id} 
+                        title={task.title}
+                        description={task.description}
+                        priority={task.priority}
+                        assigned={task.assigned}
+                    />
                 ))}
             </div>
         </div>

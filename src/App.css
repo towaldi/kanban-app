@@ -25,6 +25,14 @@
   padding: 2rem;
 }
 
+.workspace-header {
+  /* Display & box model */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
 h1, h2, p, label, .btn, .link, a {
   font-family: 'Inter';
   color: var(--gray-900);

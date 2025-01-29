@@ -15,6 +15,11 @@
     border-right: .063rem solid var(--gray-100);
 }
 
+.navbar h2 {
+    /* Display & box model */
+    padding: .375rem 0;
+}
+
 .list-items {
     /* Display & box model */
     display: flex;
@@ -38,5 +43,4 @@
     align-items: center;
     height: 1.5rem;
     width: 1.5rem;
-    margin: .375rem;
 }
