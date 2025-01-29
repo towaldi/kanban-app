@@ -1,0 +1,17 @@
+.column {
+    /* Display & box model */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 100%;
+    width: 100%;
+}
+
+.column-bgr {
+    /* Display & box model */
+    padding: 1rem;
+    height: 100%;
+    /* Other */
+    background-color: var(--gray-50);
+    border-radius: .5rem;
+}
