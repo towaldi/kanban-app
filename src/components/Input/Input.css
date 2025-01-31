@@ -61,3 +61,26 @@
     /* other */
     color: var(--error-300);
 }
+
+input[ type="date" ] {
+    /* Display & box model */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5rem 1rem;
+    width: 100%;
+    /* Other */
+    appearance: none;
+    background-color: var(--color-white);
+    color: var(--gray-300);
+    cursor: pointer;
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 1rem;
+    text-decoration: none;
+}
+
+input[ type="date" ]::-webkit-calendar-picker-indicator {
+    /* Other */
+    /* opacity: 0; */
+}
