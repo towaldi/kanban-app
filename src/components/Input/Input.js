@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 // Style
 import './Input.css';
 
-export default function Input({ label, type, placeholder, value, onChange, required, validate }) {
+export default function Input({ label, name, type, placeholder, value, onChange, required, validate }) {
     const [error, setError] = useState("");
+
     const handleBlur = () => {
         if (validate) {
             const validationError = validate(value);
@@ -13,8 +14,10 @@ export default function Input({ label, type, placeholder, value, onChange, requi
 
     return (
         <div className='input-field'>
-            {label && <label>{label}</label>}
-            <input 
+            {label && <label htmlFor={name}>{label}</label>}
+            <input
+                id={name}
+                name={name}
                 className={`input ${error ? "input-error" : ""}`}
                 type={type}
                 placeholder={placeholder}

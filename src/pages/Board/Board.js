@@ -1,26 +1,31 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect } from 'react';
+import { db } from '../../firebase';
+import { collection, onSnapshot } from 'firebase/firestore';
 // Components
 import Column from '../../components/Column/Column';
 // Style
 import './Board.css';
 import Button from '../../components/Button/Button';
 
-const initialTasks = [
-  { id: 1, title: "Set up Firebase", description: "Description 1", priority: "high", assigned: "user1", status: "todo" },
-  { id: 2, title: "Create Board UI", description: "Description 2", priority: "medium", assigned: "user2", status: "in-progress" },
-  { id: 3, title: "Fix login issues", description: "Description 3", priority: "high", assigned: "user3", status: "await-feedback" },
-  { id: 4, title: "Deploy app", description: "Description 4", priority: "low", assigned: "user4", status: "done" }
-];
-
-const columns = [
-  { id: "todo", title: "To Do" },
-  { id: "in-progress", title: "In Progress" },
-  { id: "await-feedback", title: "Await Feedback" },
-  { id: "done", title: "Done" }
-];
 
 export default function Board() {
-  const [tasks, setTasks] = useState(initialTasks);
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    // Real-time listener for tasks form Firestore
+    const unsubscribe = onSnapshot(collection(db, 'tasks'), (snapshot) => {
+      const tasksData = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setTasks(tasksData);
+    });
+    // Cleanup on unmount
+    return () => unsubscribe();
+  }, []);
+  
+  // Function to filter tasks based on status
+  const getTasksByStatus = (status) => tasks.filter(task => task.status === status);
 
   return (
     <div className='workspace'>
@@ -31,12 +36,21 @@ export default function Board() {
         />
       </div>
       <div className='kanban-board'>
-        {columns.map((column) => (
-          <Column 
-            key={column.id} 
-            title={column.title} 
-            tasks={tasks.filter(task => task.status === column.id)} 
-          />
+        {['To Do', 'In Progress', 'Await Feeback', 'Done'].map(status => (
+          <div key={status} className='column'>
+            <h2>{status}</h2>
+            <div className='tasks'>
+              {getTasksByStatus(status).map(task => (
+                <div key={task.id} className='task'>
+                  <h3>{task.title}</h3>
+                  <p>{task.description}</p>
+                  <p>Due:{task.dueDate}</p>
+                  <p>Priority: {task.priority}</p>
+                  <p>Category: {task.category}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         ))}
       </div>
     </div>
