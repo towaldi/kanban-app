@@ -32,6 +32,7 @@ export default function Board() {
       <div className='workspace-header'>
         <h1>Board</h1>
         <Button
+          style="btn-primary"
           label="Add Task"
         />
       </div>

@@ -2,9 +2,9 @@ import React from 'react';
 // Style
 import "./Button.css"
 
-export default function Button({ label }) {
+export default function Button({ style, label }) {
   return (
-    <button className='btn btn-primary'>
+    <button className={`btn ${style}`}>
       {label}
     </button>
   )

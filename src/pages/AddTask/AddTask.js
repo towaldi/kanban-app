@@ -117,6 +117,7 @@ export default function AddTask() {
           </div>
           <div className='row-right'>
             <Button
+              style="btn-secondary"
               label="Clear"
               onClick={() => setTask({
                 title: '',
@@ -130,6 +131,7 @@ export default function AddTask() {
               })}
             />
             <Button
+              style="btn-primary"
               type="Submit"
               label="Create Task" 
             />

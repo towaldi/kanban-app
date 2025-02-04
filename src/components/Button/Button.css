@@ -10,7 +10,6 @@
     border-radius: .5rem;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 
                 0 1px 2px rgba(0,0,0,0.24);
-    color: #fff;
     cursor: pointer;
     transition: all .2s ease-in-out;
 }
@@ -18,9 +17,22 @@
 .btn-primary {
     /* Other */
     background-color: var(--brand-500);
+    color: var(--color-white);
 }
 
 .btn-primary:hover {
     /* Other */
     background-color: var(--brand-700);
+}
+
+.btn-secondary {
+    /* Other */
+    background-color: var(--color-white);
+    border: 1px solid var(--gray-300);
+    color: var(--gray-500);
+}
+
+.btn-secondary:hover {
+    /* Other */
+    background-color: var(--gray-100);
 }

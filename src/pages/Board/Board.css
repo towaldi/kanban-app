@@ -7,3 +7,13 @@
     width: 100%;
     padding-top: 1rem;
 }
+
+.kanban-board .column {
+    /* Display & box model */
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    /* Other */
+    background-color: var(--gray-50);
+    border-radius: .5rem;
+}
