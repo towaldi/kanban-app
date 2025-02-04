@@ -15,5 +15,6 @@
 
 .icon-button:hover {
     /* Other */
-    background-color: var(--gray-100);
+    background-color: var(--brand-100);
+    color: var(--brand-500);
 }

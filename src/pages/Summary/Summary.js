@@ -8,11 +8,10 @@ import './Summary.css';
 export default function Summary() {
 
     return (
-        <div>
-            {/*c<div className='app-bar'>
-                <button onClick={handleLogout} className='btn btn-primary'>Logout</button>
-            </div> */}
-            <p>Summary</p>
+        <div className='workspace'>
+            <div className='workspace-header'>
+                <h1>Summary</h1>
+            </div>
         </div>
     )
 }

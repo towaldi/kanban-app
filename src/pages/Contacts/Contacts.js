@@ -6,8 +6,10 @@ import './Contacts.css';
 
 export default function Contacts() {
   return (
-    <div>
-        <p>Contacts</p>
+    <div className='workspace'>
+      <div className='workspace-header'>
+        <h1>Contacts</h1>
+      </div>
     </div>
   )
 }
