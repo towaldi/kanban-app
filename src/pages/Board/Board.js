@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../../firebase';
-import { collection, onSnapshot, doc, updateDoc } from 'firebase/firestore';
+import { collection, onSnapshot, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 // Components
 import Button from '../../components/Button/Button';
+import Task from '../../components/Task/Task';
 // Style
 import './Board.css';
-
 
 export default function Board() {
   const [tasks, setTasks] = useState([]);
@@ -26,6 +26,18 @@ export default function Board() {
   
   // Function to filter tasks based on status
   const getTasksByStatus = (status) => tasks.filter(task => task.status === status);
+
+  // Delete task from Firestore
+  const deleteTask = async (taskId) => {
+    try {
+      // Delete form Firestore
+      await deleteDoc(doc(db, 'tasks', taskId));
+      // Remove from UI
+      setTasks(tasks.filter(task => task.id !== taskId));
+    } catch (error) {
+      console.error("Error deleting task:", error);
+    }
+  };
 
   // Handle drag & drop event
   const handleDragEnd = async (result) => {
@@ -55,36 +67,31 @@ export default function Board() {
         <Button style="btn-primary" label="Add Task" />
       </div>
       <DragDropContext onDragEnd={handleDragEnd}>
-        <div className='kanban-board'>
+      <div className='kanban-board'>
           {['To Do', 'In Progress', 'Await Feedback', 'Done'].map(status => (
-            <Droppable key={status} droppableId={status}>
-              {(provided) => (
-                <div ref={provided.innerRef} {...provided.droppableProps} className='column'>
-                  <h2>{status}</h2>
-                  <div className='tasks'>
+            <div key={status} className="column">
+              <h2>{status}</h2> 
+
+              <Droppable droppableId={status}>
+                {(provided, snapshot) => (
+                  <div ref={provided.innerRef} {...provided.droppableProps} className='tasks'>
                     {getTasksByStatus(status).map((task, index) => (
                       <Draggable key={task.id} draggableId={task.id} index={index}>
-                        {(provided) => (
-                          <div 
-                            ref={provided.innerRef} 
-                            {...provided.draggableProps} 
-                            {...provided.dragHandleProps} 
-                            className='task'
-                          >
-                            <h3>{task.title}</h3>
-                            <p>{task.description}</p>
-                            <p>Due: {task.dueDate}</p>
-                            <p>Priority: {task.priority}</p>
-                            <p>Category: {task.category}</p>
-                          </div>
-                        )}
-                      </Draggable>
+                      {(provided, snapshot) => (
+                        <Task 
+                          task={task} 
+                          provided={provided} 
+                          snapshot={snapshot} 
+                          onDelete={deleteTask}
+                        />
+                      )}
+                    </Draggable>
                     ))}
                     {provided.placeholder}
                   </div>
-                </div>
-              )}
-            </Droppable>
+                )}
+              </Droppable>
+            </div>
           ))}
         </div>
       </DragDropContext>

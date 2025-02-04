@@ -1,12 +1,11 @@
 import React from 'react';
 // Style
 import './IconButton.css';
-import { PanelLeftClose, PanelRightClose } from 'lucide-react';
 
-export default function IconButton({ onClick, isExpanded}) {
+export default function IconButton({ icon: Icon, onClick }) {
   return (
     <button className='icon-button' onClick={onClick}>
-      {isExpanded ? <PanelLeftClose size={20} /> : <PanelRightClose size={20} />}
+      {Icon && <Icon size={20} />}
     </button>
   )
 }
