@@ -98,12 +98,14 @@ export default function AddTask() {
                 name="priority"
                 value={task.priority}
                 onChange={handleChange}
+                options={["High", "Medium", "Low"]}
               />
               <Select
                 label="Category"
                 name="category"
                 value={task.category}
                 onChange={handleChange}
+                options={["Technical Task", "User Story", "Prototyping", "Wireframes"]}
               />
               <Input
                 type="text"

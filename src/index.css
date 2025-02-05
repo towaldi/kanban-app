@@ -10,10 +10,17 @@
   --color-black: #000;
   --color-white: #fff;
 
+  --blue-700:#175CD3;
+  --blue-500:#2E90FA;
+  --blue-300:#84CAFF;
+  --blue-100:#D1E9FF;
+  --blue-50:#EFF8FF;
+
   --brand-700: #6941C6;
   --brand-500: #9E77ED;
   --brand-300: #D6BBFB;
   --brand-100: #F4EBFF;
+  --brand-50: #F9F5FF;
 
   --error-300: #FDA29B;
 
@@ -22,6 +29,24 @@
   --gray-300: #D5D7DA;
   --gray-100: #F5F5F5;
   --gray-50: #FAFAFA;
+
+  --green-700:#027A48;
+  --green-500:#12B76A;
+  --green-300:#6CE9A6;
+  --green-100:#D1FADF;
+  --green-50:#ECFDF3;
+
+  --orange-700:#C4320A;
+  --orange-500:#FB6514;
+  --orange-300:#FEB273;
+  --orange-100:#FFEAD5;
+  --orange-50:#FFF6ED;
+
+  --rose-700:#C01048;
+  --rose-500:#F63D68;
+  --rose-300:#FEA3B4;
+  --rose-100:#FFE4E8;
+  --rose-50:#FFF1F3;
 }
 
 @font-face {

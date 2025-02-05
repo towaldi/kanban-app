@@ -1,8 +1,11 @@
 import React from 'react';
 import { Trash } from 'lucide-react';
+// Compoments
+import Chip from '../Chip/Chip';
+// Icons
+import IconButton from '../IconButton/IconButton';
 // Sytle
 import './Task.css';
-import IconButton from '../IconButton/IconButton';
 
 export default function Task({ task, provided, snapshot, onDelete }) {
     return (
@@ -20,7 +23,7 @@ export default function Task({ task, provided, snapshot, onDelete }) {
                     onClick={() => onDelete(task.id)}
                 />
             </div>
-            <p>Category: {task.category}</p>
+            {task.category && <Chip label={task.category}/>}
             <p>{task.description}</p>
             <p>Due: {task.dueDate}</p>
             <div className='task-row'>

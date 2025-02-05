@@ -33,7 +33,7 @@
   align-items: center;
 }
 
-h1, h2, h3, p, label, .btn, .link, a, option, textarea {
+h1, h2, h3, p, label, .btn, .link, a, option, textarea, .chip {
   font-family: 'Inter';
 }
 
@@ -95,4 +95,9 @@ label {
 
 a {
   text-decoration: none;
+}
+
+.chip {
+  font-weight: 400;
+  font-size: .75rem;
 }

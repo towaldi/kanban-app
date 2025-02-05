@@ -2,7 +2,7 @@ import React from 'react';
 // Style
 import './Select.css';
 
-export default function Select({ label, name, value, onChange }) {
+export default function Select({ label, name, value, onChange, options = [] }) {
   return (
     <label className='select'>
         {label}
@@ -11,9 +11,12 @@ export default function Select({ label, name, value, onChange }) {
             value={value}
             onChange={onChange}
         >
-            <option value="high">High</option>
-            <option value="medium">Medium</option>
-            <option value="low">Low</option>
+            <option value="" disabled>Select a {label}</option>
+            {options.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
         </select>
     </label>
   )
