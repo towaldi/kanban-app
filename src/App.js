@@ -13,6 +13,7 @@ import Privacy from './pages/Privacy/Privacy';
 import LegalNotice from './pages/LegalNotice/LegalNotice';
 import Navbar from './components/Navbar/Navbar.js';
 import Appbar from './components/Appbar/Appbar.js';
+import Snackbar from './components/Snackbar/Snackbar';
 // Style
 import './App.css';
 
@@ -20,6 +21,9 @@ import './App.css';
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isNavbarVisible, setIsNavbarVisible] = useState(true);
+
+  // Snackbar state
+  const [snackbar, setSnackbar] = useState({ isVisible: false, message: ''});
 
   useEffect(() => {
     const auth = getAuth();
@@ -35,11 +39,26 @@ export default function App() {
     setIsNavbarVisible((prev) => !prev);
   };
 
-  {/*console.log("Firebase app initialized:", app);*/}
+  // Function to who Snackbar
+  const showSnackbar = (message) => {
+    setSnackbar({ isVisible: true, message});
+
+    // Auto-hide after 5 sec.
+    setTimeout(() => {
+      setSnackbar({ isVisible: false, message: ''});
+    }, 5000);
+  };
 
   return (
     <Router>
       <div className='app'>
+        {/* Dialog & snackbar */}
+        {snackbar.isVisible && (
+          <Snackbar 
+            label={snackbar.message}
+            onClose={() => setSnackbar({ isVisible: false, message: '' })}
+          />
+        )}
         {/* Show Navbar and Appbar only if authenticated */}
         {isAuthenticated && (
           <div className='content-container'>
@@ -48,7 +67,7 @@ export default function App() {
               <Appbar toggleNavbar={toggleNavbar} isNavbarVisible={isNavbarVisible}/>
               <Routes>
                 <Route path="/summary" element={<Summary />} />
-                <Route path="/add-task" element={<AddTask />} />
+                <Route path="/add-task" element={<AddTask showSnackbar={showSnackbar} />} />
                 <Route path="/board" element={<Board />} />
                 <Route path="/contacts" element={<Contacts />} />
                 <Route path="/privacy" element={<Privacy />} />

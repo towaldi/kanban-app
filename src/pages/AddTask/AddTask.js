@@ -9,7 +9,7 @@ import Button from '../../components/Button/Button';
 // Style
 import './AddTask.css';
 
-export default function AddTask() {
+export default function AddTask({ showSnackbar }) {
   // State to store from inputs
   const [task, setTask] = useState({
     title: '',
@@ -19,7 +19,7 @@ export default function AddTask() {
     priority: '',
     category: '',
     subtasks: '',
-    status: 'To Do' // Default column whnme a task is created
+    status: 'To Do'
   });
 
   // Function to handle input changes
@@ -33,13 +33,13 @@ export default function AddTask() {
     e.preventDefault();
 
     if (!task.title || !task.description) {
-      alert("Title and description are required!");
+      showSnackbar("Title and description are required!");
     }
 
     try {
       // Add task to Firebase
       const docRef = await addDoc(collection(db, 'tasks'), task);
-      alert("Task added successfully!");
+      showSnackbar("Task added successfully!");
       // Reset form fields
       setTask({
         title: '',
@@ -53,7 +53,7 @@ export default function AddTask() {
       });
     } catch (error) {
       console.error("Error adding task:", error);
-      alert("Failed to add task. Try again.")
+      showSnackbar("Failed to add task. Try again.");
     }
   };
 
@@ -120,6 +120,7 @@ export default function AddTask() {
           <div className='row-right'>
             <Button
               style="btn-secondary"
+              type="button"
               label="Clear"
               onClick={() => setTask({
                 title: '',
