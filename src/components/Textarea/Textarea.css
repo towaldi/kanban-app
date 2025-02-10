@@ -34,3 +34,37 @@
     box-shadow: 0 0 2px 4px rgba(226, 196, 255, 0.5); 
     outline-offset: 6rem;
 }
+
+.textarea::placeholder {
+    /* Other */
+    color: var(--gray-300);
+}
+
+.textarea:focus {
+    /* Other */
+    border: 1px solid var(--brand-300);
+    box-shadow: 0 0 2px 4px rgba(226, 196, 255, 0.5); 
+    outline-offset: 6rem;
+}
+
+.textarea-error {
+    /* Other */
+    border: 1px solid var(--error-300);
+}
+
+.textarea-error:hover {
+    /* Other */
+    border: 1px solid var(--error-300);
+}
+
+.textarea-error:focus {
+    /* Other */
+    border: 1px solid var(--error-300);
+    box-shadow: 0 0 2px 4px rgba(255, 196, 196, 0.5); 
+    outline-offset: 6rem;
+}
+
+.textarea-helper-text {
+    /* other */
+    color: var(--error-300);
+}

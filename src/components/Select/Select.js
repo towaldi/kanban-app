@@ -2,7 +2,7 @@ import React from 'react';
 // Style
 import './Select.css';
 
-export default function Select({ label, name, value, onChange, options = [] }) {
+export default function Select({ label, name, value, onChange, options = [], error }) {
   return (
     <label className='select'>
         {label}
@@ -10,6 +10,7 @@ export default function Select({ label, name, value, onChange, options = [] }) {
             name={name}
             value={value}
             onChange={onChange}
+            className={error ? "select-error" : ""}
         >
             <option value="" disabled>Select a {label}</option>
             {options.map((option) => (
@@ -18,6 +19,7 @@ export default function Select({ label, name, value, onChange, options = [] }) {
               </option>
             ))}
         </select>
+        {error && <p className='select-helper-text'>{error}</p>}
     </label>
   )
 }

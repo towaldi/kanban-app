@@ -22,9 +22,27 @@ export default function AddTask({ showSnackbar }) {
     status: 'To Do'
   });
 
+  // State for validation error
+  const [errors, setErrors] = useState({});
+
   // Function to handle input changes
   const handleChange = (e) => {
     setTask({ ...task, [e.target.name]: e.target.value })
+    // Clear error when user types
+    setErrors({ ...errors, [e.target.name]: '' });
+  };
+
+  // Function to validate inputs
+  const validateInputs = () => {
+    const newErrors = {};
+
+    if (!task.title.trim()) newErrors.title = "Title is required";
+    if (!task.assignedTo) newErrors.assignedTo = "Assigned To is required";
+    if (!task.dueDate) newErrors.dueDate = "Due Date is required";
+    if (!task.category) newErrors.category = "Category is required";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0; // Return true if no errors
   };
 
   // Function to submit form and add task to Firebase
@@ -32,15 +50,16 @@ export default function AddTask({ showSnackbar }) {
     // Prevent default form submission
     e.preventDefault();
 
-    if (!task.title || !task.description) {
-      showSnackbar("Title and description are required!");
+    if (!validateInputs()) {
+      showSnackbar("Please fill in all required fields.");
+      return;
     }
 
     try {
-      // Add task to Firebase
-      const docRef = await addDoc(collection(db, 'tasks'), task);
+      await addDoc(collection(db, 'tasks'), task);
       showSnackbar("Task added successfully!");
-      // Reset form fields
+
+      // Reset form fields and errors
       setTask({
         title: '',
         description: '',
@@ -51,6 +70,7 @@ export default function AddTask({ showSnackbar }) {
         subtasks: '',
         status: 'To Do'
       });
+      setErrors({});
     } catch (error) {
       console.error("Error adding task:", error);
       showSnackbar("Failed to add task. Try again.");
@@ -70,6 +90,8 @@ export default function AddTask({ showSnackbar }) {
                 placeholder="Enter a title"
                 value={task.title}
                 onChange={handleChange}
+                required
+                error={errors.title}
               />
               <Textarea 
                 label="Description"
@@ -82,6 +104,8 @@ export default function AddTask({ showSnackbar }) {
                 name="assignedTo"
                 value={task.assignedTo}
                 onChange={handleChange}
+                required
+                error={errors.assignedTo}
               />
             </div>
             <div className='column'>
@@ -92,6 +116,8 @@ export default function AddTask({ showSnackbar }) {
                 value={task.dueDate}
                 onChange={handleChange}
                 placeholder="dd/mm/yyyy"
+                required
+                error={errors.dueDate}
               />
               <Select
                 label="Priority"
@@ -106,6 +132,8 @@ export default function AddTask({ showSnackbar }) {
                 value={task.category}
                 onChange={handleChange}
                 options={["Technical Task", "User Story", "Prototyping", "Wireframes"]}
+                required
+                error={errors.category}
               />
               <Input
                 type="text"
