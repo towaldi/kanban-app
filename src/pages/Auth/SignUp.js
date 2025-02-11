@@ -76,6 +76,7 @@ export default function SignUp() {
                         required
                     />
                     <Button
+                        style="btn-primary"
                         type="submit"
                         label="Sign Up"
                     />

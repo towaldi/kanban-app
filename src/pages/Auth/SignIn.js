@@ -83,6 +83,7 @@ export default function SignIn() {
                         <span>Remember me</span>
                     </label>
                     <Button
+                        style="btn-primary"
                         type="submit"
                         label="Sign in"
                     />
