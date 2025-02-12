@@ -40,3 +40,18 @@
     /* Display & box model */
     margin-top: 1rem;
 }
+
+.priority-icon.high {
+    /* Other */
+    color: var(--orange-700);
+}
+
+.priority-icon.medium {
+    /* Other */
+    color: var(--blue-700);
+}
+
+.priority-icon.low {
+    /* Other */
+    color: var(--gray-600);  
+}

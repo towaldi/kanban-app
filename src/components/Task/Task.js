@@ -1,13 +1,27 @@
 import React from 'react';
-import { Trash } from 'lucide-react';
 // Compoments
 import Chip from '../Chip/Chip';
-// Icons
 import IconButton from '../IconButton/IconButton';
+// Icons
+import { Trash, ChevronDown, ChevronUp, Minus } from 'lucide-react';
 // Sytle
 import './Task.css';
 
 export default function Task({ task, provided, snapshot, onDelete }) {
+    // Function to return priority icon
+    const getPriorityIcon = (priority) => {
+        switch (priority) {
+            case "High":
+                return <ChevronUp className="priority-icon high" size={20}/>;
+            case "Medium":
+                return <Minus className="priority-icon medium" size={20}/>;
+            case "Low":
+                return <ChevronDown className="priority-icon low" size={20}/>;
+            default:
+                break;
+        }
+    }
+
     return (
         <div 
             ref={provided.innerRef} 
@@ -27,7 +41,7 @@ export default function Task({ task, provided, snapshot, onDelete }) {
             <p>{task.description}</p>
             <p>Due: {task.dueDate}</p>
             <div className='task-row'>
-                <p>Priority: {task.priority}</p>
+                <p>{getPriorityIcon(task.priority)}</p>
                 <p>Assigned to: {task.assignedTo}</p>
             </div>
         </div>

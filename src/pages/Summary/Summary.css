@@ -1,0 +1,69 @@
+.grid {
+    /* Display & box model */
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    height: 100%;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.card {
+    /* Display & box model */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    /* Other */
+    background-color: var(--color-white);
+    border: .063rem solid var(--gray-100);
+    border-radius: 1rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08), 
+                0 1px 2px rgba(0,0,0,0.12);
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+}
+
+.card-header {
+    /* Display & box model */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem
+}
+
+.feature-icon {
+    /* Display & box model */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .5rem;
+    /* Other */
+    background-color: var(--brand-300);
+    border: .5rem solid var(--brand-100);
+    border-radius: .8rem;
+    color: var(--brand-700);
+}
+
+
+.c-1 {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+.c-2 {
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+.c-3 {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}

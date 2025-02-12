@@ -104,6 +104,7 @@ export default function AddTask({ showSnackbar }) {
                 name="assignedTo"
                 value={task.assignedTo}
                 onChange={handleChange}
+                options={["Bob", "Carl", "Jack"]}
                 required
                 error={errors.assignedTo}
               />
