@@ -29,6 +29,7 @@ export default function Summary() {
                 const done = tasks.filter(task => task.status === 'Done').length;
                 const urgent = tasks.filter(task => {
                     const today = new Date().toISOString().split('T')[0];
+                    return task.dueDate === today;
                 }).length;
                 const total = tasks.length;
 
