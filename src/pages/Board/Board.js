@@ -64,7 +64,10 @@ export default function Board() {
     <div className='workspace'>
       <div className='workspace-header'>
         <h1>Board</h1>
-        <Button style="btn-primary" label="Add Task" />
+        <Button 
+          style="btn-primary" 
+          label="Add Task" 
+        />
       </div>
       <DragDropContext onDragEnd={handleDragEnd}>
       <div className='kanban-board'>

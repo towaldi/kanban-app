@@ -1,0 +1,24 @@
+.contact-list-item {
+    /* Display & box model */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    padding: .5rem;
+    /* Other */
+    border: none;
+    border-radius: .5rem;
+    color: var(--gray-700);
+    cursor: pointer;
+    transition: all .1s ease-in-out;
+}
+
+.contact-list-item:hover {
+    /* Other */
+    background-color: var(--gray-100);
+}
+
+.contact-list-item.active {
+    /* Other */
+    color: var(--brand-700);
+}
