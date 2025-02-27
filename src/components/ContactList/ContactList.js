@@ -6,7 +6,7 @@ import ContactListItem from '../ContactListItem/ContactListItem';
 // Style
 import './ContactList.css';
 
-export default function ContactList() {
+export default function ContactList({ onSelectContact }) {
     const [groupedContacts, setGroupedContacts] = useState({});
 
     useEffect(() => {
@@ -51,7 +51,11 @@ export default function ContactList() {
                             <h2>{letter}</h2>
                         </div>
                         {groupedContacts[letter].map(contact => (
-                            <ContactListItem key={contact.id} contact={contact} />
+                            <ContactListItem 
+                                key={contact.id} 
+                                contact={contact}
+                                onSelect={onSelectContact}
+                            />
                         ))}
                     </div>
                 ))

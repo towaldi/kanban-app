@@ -4,9 +4,12 @@ import Avatar from '../Avatar/Avatar';
 // Style
 import './ContactListItem.css';
 
-export default function ContactListItem({ contact }) {
+export default function ContactListItem({ contact, onSelect }) {
   return (
-    <li className='contact-list-item'>
+    <li 
+        className='contact-list-item'
+        onClick={() => onSelect(contact)}
+    >
       <Avatar />
       <div className='column-1'>
         <h3>{contact.name}</h3>
