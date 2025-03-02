@@ -5,7 +5,7 @@ import Button from '../Button/Button';
 // Style
 import './ContactDetails.css';
 
-export default function ContactDetails({ name, email, phone, onDelete }) {
+export default function ContactDetails({ name, email, phone, onDelete, onEdit }) {
     return (
         <div className='contact-details'>
             <div className='contact-header'>
@@ -18,6 +18,7 @@ export default function ContactDetails({ name, email, phone, onDelete }) {
                 <Button 
                     style='btn-secondary'
                     label='Edit Contact'
+                    onClick={onEdit}
                 />
                 <Button 
                     style='btn-secondary'

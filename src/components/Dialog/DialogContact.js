@@ -1,61 +1,84 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+// Firebase
+import { doc, updateDoc } from 'firebase/firestore';
+import { db } from '../../firebase';
 // Components
 import Input from '../Input/Input';
 import Button from '../Button/Button';
 // Style
 import './Dialog.css';
 
-export default function DialogContact({ onClose, onAdd }) {
+export default function DialogContact({ onClose, onSave, contactToEdit }) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
 
-    const handleSubmit = (e) => {
+    // Set default values when editing
+    useEffect(() => {
+        if (contactToEdit) {
+            setName(contactToEdit.name);
+            setEmail(contactToEdit.email);
+            setPhone(contactToEdit.phone);
+        }
+    }, [contactToEdit]);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (!name) return;
 
-        const newContact = { name, email, phone };
-        onAdd(newContact);  // Send data to firestore
-    }
-  return (
-    <div className='dialog-bgr'>
-        <form className='dialog' onSubmit={handleSubmit}>
-            <h1>Add Contact</h1>
-            <div className='dialog-input'>
-                <Input 
-                    label='Name'
-                    placeholder='Enter Name'
-                    required
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                />
-                <Input 
-                    label='Email'
-                    placeholder='Enter Email'
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                <Input 
-                    label='Phone'
-                    placeholder='Enter Phone Number'
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                />
-            </div>
-            <div className='row-right'>
-                <Button 
-                    style='btn-secondary'
-                    type='button'
-                    label='Cancel'
-                    onClick={onClose}
-                />
-                <Button 
-                    style='btn-primary'
-                    type='submit'
-                    label='Add'
-                />
-            </div>
-        </form>
-    </div>
-  )
+        const updatedContact = { name, email, phone };
+
+        if (contactToEdit) {
+            // If editing, update the contact in Firestore
+            const contactRef = doc(db, 'contacts', contactToEdit.id);
+            await updateDoc(contactRef, updatedContact);
+        } else {
+            // If adding a nwe contact, call the provided function
+            onSave(updatedContact)
+        }
+        // Close the dialog after saving
+        onClose();
+    };
+
+    return (
+        <div className='dialog-bgr'>
+            <form className='dialog' onSubmit={handleSubmit}>
+                <h1>{contactToEdit ? 'Edit Contact' : 'Add Contact'}</h1>
+                <div className='dialog-input'>
+                    <Input 
+                        label='Name'
+                        placeholder='Enter Name'
+                        required
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                    <Input 
+                        label='Email'
+                        placeholder='Enter Email'
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <Input 
+                        label='Phone'
+                        placeholder='Enter Phone Number'
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                    />
+                </div>
+                <div className='row-right'>
+                    <Button 
+                        style='btn-secondary'
+                        type='button'
+                        label='Cancel'
+                        onClick={onClose}
+                    />
+                    <Button 
+                        style='btn-primary'
+                        type='submit'
+                        label={contactToEdit ? 'Save Changes' : 'Add Contact'}
+                    />
+                </div>
+         </form>
+        </div>
+    )
 }

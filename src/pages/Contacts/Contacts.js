@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 // Firebase
-import { collection, addDoc, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
 // Components
 import Button from '../../components/Button/Button';
@@ -13,6 +13,7 @@ import './Contacts.css';
 export default function Contacts() {
   const [selectedContact, setSelectedContact] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [contactToEdit, setContactToEdit] = useState(null);
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
@@ -30,7 +31,7 @@ export default function Contacts() {
     };
 
     fetchContacts();
-  }, []); // Runs once on mount
+  }, []);
 
   // Add contact to firestore
   const addContactToFirestore = async (contact) => {
@@ -39,6 +40,33 @@ export default function Contacts() {
       setContacts([...contacts, { id: docRef.id, ...contact }]); // Update local state with Firestore ID
     } catch (error) {
       console.error('Error adding contact:', error);
+    }
+  };
+
+  // Edit contact (opens dialog with selected contact)
+  const openEditDialog = (contact) => {
+    setContactToEdit(contact);
+    setIsDialogOpen(true);
+  };
+
+  // Save edited contact in Firestore
+  const updateContactInFirestore = async (updatedContact) => {
+    try {
+      const contactRef = doc(db, 'contacts', updatedContact.id);
+      await updateDoc(contactRef, updatedContact);
+      
+      // Update local UI state
+      setContacts(prevContacts =>
+        prevContacts.map(contact =>
+          contact.id === updatedContact.id ? { ...contact, ...updatedContact } : contact
+        )
+      );
+      // Update displayed contact
+      setSelectedContact(prev =>
+        prev && prev.id === updatedContact.id ? { ...prev, ...updatedContact } : prev
+      );
+    } catch (error) {
+      console.error('Error updating contact:', error);
     }
   };
 
@@ -60,26 +88,37 @@ export default function Contacts() {
         <Button 
           style="btn-primary" 
           label="Add Contact"
-          onClick={() => setIsDialogOpen(true)}
+          onClick={() => {
+            setIsDialogOpen(true);
+            setContactToEdit(null);
+          }}
         />
       </div>
       <div className='row-gap-1'>
-        <ContactList onSelectContact={setSelectedContact} contacts={contacts} />
-          {selectedContact && 
-            <ContactDetails 
-              {...selectedContact}
-              onDelete={() => deleteContactFromFirestore(selectedContact.id)}
-            />
-          }
-          {isDialogOpen && (
-            <DialogContact 
-              onClose={() => setIsDialogOpen(false)} 
-              onAdd={(contact) => {
-                addContactToFirestore(contact); // Add to Firestore
-                setIsDialogOpen(false); // Close dialog
-              }}
-            />
-          )}
+        <ContactList 
+          onSelectContact={setSelectedContact} 
+          contacts={contacts}
+        />
+        {selectedContact && 
+          <ContactDetails 
+            {...selectedContact}
+            onDelete={() => deleteContactFromFirestore(selectedContact.id)}
+            onEdit={() => openEditDialog(selectedContact)} // Pass function to open edit dialog
+        />}
+        {isDialogOpen && (
+          <DialogContact 
+            onClose={() => setIsDialogOpen(false)} 
+            onSave={(contact) => {
+              if (contactToEdit) {
+                updateContactInFirestore({ id: contactToEdit.id, ...contact });
+              } else {
+                addContactToFirestore(contact);
+              }
+              setIsDialogOpen(false);
+            }}
+            contactToEdit={contactToEdit} // Pass selected contact for editing
+          />
+        )}
       </div>
     </div>
   )
