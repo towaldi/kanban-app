@@ -1,6 +1,6 @@
 import React from 'react';
 // Components
-import Avatar from '../Avatar/Avatar';
+import AvatarContact from '../Avatar/AvatarContact';
 import Button from '../Button/Button';
 // Style
 import './ContactDetails.css';
@@ -11,7 +11,7 @@ export default function ContactDetails({ name, email, phone, onDelete, onEdit })
             <div className='contact-content'>
                 <div className='contact-img'></div>
                 <div className='contact-header'>
-                    <Avatar />
+                    <AvatarContact name={name} />
                     <h1>{name}</h1>
                 </div>
                 <div className='contact-infos'>

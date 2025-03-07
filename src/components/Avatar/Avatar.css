@@ -18,3 +18,16 @@
     box-shadow: 0 0 2px 4px rgba(226, 196, 255, 0.5); 
     outline-offset: 6rem;
 }
+
+.avatar-contact {
+    /* Display & box model */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2rem;
+    width: 2rem;
+    /* Other */
+    background-color: var(--brand-300);
+    border: none;
+    border-radius: 2rem;
+}
