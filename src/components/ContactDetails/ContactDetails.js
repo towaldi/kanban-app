@@ -8,12 +8,17 @@ import './ContactDetails.css';
 export default function ContactDetails({ name, email, phone, onDelete, onEdit }) {
     return (
         <div className='contact-details'>
-            <div className='contact-header'>
-                <Avatar />
-                <h1>{name}</h1>
+            <div className='contact-content'>
+                <div className='contact-img'></div>
+                <div className='contact-header'>
+                    <Avatar />
+                    <h1>{name}</h1>
+                </div>
+                <div className='contact-infos'>
+                    <p>{email}</p>
+                    <p>{phone}</p>
+                </div>
             </div>
-            <p>{email}</p>
-            <p>{phone}</p>
             <div className='contact-actions'>
                 <Button 
                     style='btn-secondary'

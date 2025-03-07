@@ -36,12 +36,17 @@ export default function Contacts() {
   // Add contact to firestore
   const addContactToFirestore = async (contact) => {
     try {
-      const docRef = await addDoc(collection(db, 'contacts'), contact);
-      setContacts([...contacts, { id: docRef.id, ...contact }]); // Update local state with Firestore ID
+        const docRef = await addDoc(collection(db, 'contacts'), {
+            name: contact.name,
+            email: contact.email,
+            phone: contact.phone
+        }); // Do not include `id` in Firestore
+
+        setContacts([...contacts, { id: docRef.id, ...contact }]); // Add the `id` manually after Firestore returns it
     } catch (error) {
-      console.error('Error adding contact:', error);
+        console.error('Error adding contact:', error);
     }
-  };
+};
 
   // Edit contact (opens dialog with selected contact)
   const openEditDialog = (contact) => {
@@ -51,6 +56,11 @@ export default function Contacts() {
 
   // Save edited contact in Firestore
   const updateContactInFirestore = async (updatedContact) => {
+    if (!updatedContact.id) {
+      console.error("Error: Contact ID is missing, cannot update.");
+      return; // Prevent updating without an ID
+    }
+
     try {
       const contactRef = doc(db, 'contacts', updatedContact.id);
       await updateDoc(contactRef, updatedContact);
@@ -110,13 +120,13 @@ export default function Contacts() {
             onClose={() => setIsDialogOpen(false)} 
             onSave={(contact) => {
               if (contactToEdit) {
-                updateContactInFirestore({ id: contactToEdit.id, ...contact });
+                  updateContactInFirestore(contact); // Firestore update + UI update
               } else {
-                addContactToFirestore(contact);
+                  addContactToFirestore(contact);
               }
-              setIsDialogOpen(false);
+              setIsDialogOpen(false); // Close dialog after save
             }}
-            contactToEdit={contactToEdit} // Pass selected contact for editing
+            contactToEdit={contactToEdit}
           />
         )}
       </div>

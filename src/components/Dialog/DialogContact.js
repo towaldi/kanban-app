@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 // Firebase
-import { doc, updateDoc } from 'firebase/firestore';
-import { db } from '../../firebase';
 // Components
 import Input from '../Input/Input';
 import Button from '../Button/Button';
@@ -22,22 +20,20 @@ export default function DialogContact({ onClose, onSave, contactToEdit }) {
         }
     }, [contactToEdit]);
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         if (!name) return;
-
-        const updatedContact = { name, email, phone };
-
-        if (contactToEdit) {
-            // If editing, update the contact in Firestore
-            const contactRef = doc(db, 'contacts', contactToEdit.id);
-            await updateDoc(contactRef, updatedContact);
-        } else {
-            // If adding a nwe contact, call the provided function
-            onSave(updatedContact)
-        }
-        // Close the dialog after saving
-        onClose();
+    
+        const updatedContact = {
+            id: contactToEdit?.id, // Include ID when editing
+            name, 
+            email, 
+            phone 
+        };
+    
+        // Send data to Contacts.js, where Firestore update happens
+        onSave(updatedContact);
+        onClose(); // Close dialog after saving
     };
 
     return (
