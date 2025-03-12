@@ -35,14 +35,14 @@
     flex-direction: row;
     align-items: center;
     gap: 1rem;
-    padding: 1rem;
+    padding: 1rem 2rem;
 }
 
 .contact-infos {
     /* Display & Box model */
     display: flex;
     flex-direction: column;
-    padding: 0 1rem 0 1rem;
+    padding: 0 2rem;
 }
 
 .contact-actions {

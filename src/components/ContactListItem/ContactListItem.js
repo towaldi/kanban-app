@@ -4,10 +4,10 @@ import AvatarContact from '../Avatar/AvatarContact';
 // Style
 import './ContactListItem.css';
 
-export default function ContactListItem({ contact, onSelect }) {
+export default function ContactListItem({ contact, onSelect, isSelected }) {
   return (
     <li 
-        className='contact-list-item'
+        className={`contact-list-item ${isSelected ? 'active' : ''}`} // Apply 'active' class
         onClick={() => onSelect(contact)}
     >
       <AvatarContact name={contact.name} />

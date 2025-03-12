@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../../firebase';
 // Components
 import ContactListItem from '../ContactListItem/ContactListItem';
 // Style
@@ -8,6 +6,7 @@ import './ContactList.css';
 
 export default function ContactList({ onSelectContact, contacts }) {
     const [groupedContacts, setGroupedContacts] = useState({});
+    const [selectedContact, setSelectedContact] = useState(null); // Track selected contact
 
     useEffect(() => {
         const groupContacts = (contacts) => {
@@ -25,6 +24,11 @@ export default function ContactList({ onSelectContact, contacts }) {
         setGroupedContacts(groupContacts(contacts));
     }, [contacts]);
 
+    const handleSelectContact = (contact) => {
+        setSelectedContact(contact); // Set the selected contact
+        onSelectContact(contact); // Notify the parent component
+    };
+
     return (
         <ul className='contact-list'>
             {Object.keys(groupedContacts).length === 0 ? (
@@ -39,7 +43,8 @@ export default function ContactList({ onSelectContact, contacts }) {
                             <ContactListItem 
                                 key={contact.id} 
                                 contact={contact}
-                                onSelect={onSelectContact}
+                                isSelected={selectedContact?.id === contact.id} // Check if selected
+                                onSelect={handleSelectContact}  // pass selection handler
                             />
                         ))}
                     </div>

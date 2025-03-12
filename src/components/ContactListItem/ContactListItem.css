@@ -20,5 +20,6 @@
 
 .contact-list-item.active {
     /* Other */
+    background-color: var(--brand-100);
     color: var(--brand-700);
 }
