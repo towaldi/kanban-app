@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { db } from '../../firebase'; // Firebase Firestore instance
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, getDocs } from 'firebase/firestore';
 // Components
 import Input from '../../components/Input/Input';
 import Textarea from '../../components/Textarea/Textarea';
@@ -24,6 +24,26 @@ export default function AddTask({ showSnackbar }) {
 
   // State for validation error
   const [errors, setErrors] = useState({});
+
+  // State for contacts
+  const [contacts, setContacts] = useState([]);
+  // Fetch contacts from Firestore
+  useEffect(() => {
+    const fetchContacts = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'contacts'));
+        const contactsArray = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setContacts(contactsArray);
+      } catch (error) {
+        console.error('Error fetching contacts:', error);
+      }
+    };
+
+    fetchContacts();
+  }, []);
 
   // Function to handle input changes
   const handleChange = (e) => {
@@ -104,7 +124,7 @@ export default function AddTask({ showSnackbar }) {
                 name="assignedTo"
                 value={task.assignedTo}
                 onChange={handleChange}
-                options={["Bob", "Carl", "Jack"]}
+                options={contacts.map(contact => contact.name)} // Map Firestore contacts
                 required
                 error={errors.assignedTo}
               />

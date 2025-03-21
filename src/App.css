@@ -22,6 +22,15 @@
   overflow-y: auto;
 }
 
+.workspace-vert {
+  /* Display & box model */
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+}
+
 .workspace {
   /* Display & box model */
   padding: 2rem;
