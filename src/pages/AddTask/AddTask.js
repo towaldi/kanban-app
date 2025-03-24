@@ -76,7 +76,10 @@ export default function AddTask({ showSnackbar }) {
     }
 
     try {
-      await addDoc(collection(db, 'tasks'), task);
+      await addDoc(collection(db, 'tasks'), {
+        ...task,
+        assignedTo: contacts.find(contact => contact.name === task.assignedTo)?.name || ""
+      });
       showSnackbar("Task added successfully!");
 
       // Reset form fields and errors

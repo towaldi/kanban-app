@@ -7,7 +7,7 @@ export default function AvatarContact({ name }) {
     const getInitials = (name) => {
         if (!name) return "??"; // Handle empty name
         
-        const words = name.trim().split(" "); // Split by space
+        const words = name.trim().split(/\s+/); // Split by space (handle multiple spaces)
         if (words.length === 1) {
             return words[0][0].toUpperCase(); // Return first letter if only one word
         }
