@@ -5,13 +5,15 @@ import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 // Components
 import Button from '../../components/Button/Button';
 import Task from '../../components/Task/Task';
+import Drawer from '../../components/Drawer/Drawer';
+import DialogTask from '../../components/Dialog/DialogTask';
 // Style
 import './Board.css';
-import Drawer from '../../components/Drawer/Drawer';
 
 export default function Board() {
   const [tasks, setTasks] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   useEffect(() => {
     // Real-time listener for tasks form Firestore
@@ -72,7 +74,8 @@ export default function Board() {
           <h1>Board</h1>
           <Button 
             style="btn-primary" 
-            label="Add Task" 
+            label="Add Task"
+            onClick={() => setIsDialogOpen(true)} // Open 'DialogTask'
           />
         </div>
         <DragDropContext onDragEnd={handleDragEnd}>
@@ -107,7 +110,8 @@ export default function Board() {
           </div>
         </DragDropContext>
       </div>
-      {selectedTask && <Drawer task={selectedTask} onClose={() => setSelectedTask(null)}/>}
+      {selectedTask && <Drawer task={selectedTask} onClose={() => setSelectedTask(null)} />}
+      {isDialogOpen && <DialogTask onClose={() => setIsDialogOpen(false)} />}
     </div>
   );
 }

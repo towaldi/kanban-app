@@ -1,7 +1,4 @@
-import React, { useEffect, useState } from 'react';
-// Firebase
-import { db } from '../../firebase';
-import { doc, getDoc } from 'firebase/firestore';
+import React, { useState } from 'react';
 // Components
 import Chip from '../Chip/Chip';
 import IconButton from '../IconButton/IconButton';
@@ -12,8 +9,6 @@ import { Trash, ChevronDown, ChevronUp, Minus } from 'lucide-react';
 import './Task.css';
 
 export default function Task({ task, provided, snapshot, onDelete, onSelect, isSelected }) {
-    const [assignedContact, setAssignedContact] = useState(null);
-    const [loading, setLoading] = useState(false);
 
     const getPriorityIcon = (priority) => {
         switch (priority) {
