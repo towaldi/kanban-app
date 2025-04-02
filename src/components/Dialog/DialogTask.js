@@ -7,6 +7,8 @@ import Input from '../Input/Input';
 import Textarea from '../Textarea/Textarea';
 import Select from '../Select/Select';
 import Button from '../Button/Button';
+// Icons
+import { Trash } from 'lucide-react';
 // Style
 import './Dialog.css';
 
@@ -19,7 +21,7 @@ export default function DialogTask({ onClose }) {
         dueDate: '',
         priority: '',
         category: '',
-        subtasks: '',
+        subtasks: [],
         status: 'To Do'
     });
 
@@ -52,6 +54,27 @@ export default function DialogTask({ onClose }) {
         setTask({ ...task, [e.target.name]: e.target.value });
         // Clear error when user types
         setErrors({ ...errors, [e.target.name]: '' });
+    };
+
+    // Handle adding subtasks
+    const [subtaskInput, setSubtaskInput] = useState("");
+
+    const handleAddSubtask = () => {
+        if (subtaskInput.trim() !== "") {
+            setTask((prevTask) => ({
+                ...prevTask,
+                subtasks: [...prevTask.subtasks, subtaskInput] // Add to array
+            }));
+            setSubtaskInput(""); // Clear input after adding
+        }
+    };
+
+    // Handle removing subtasks
+    const handleRemoveSubtask = (index) => {
+        setTask((prevTask) => ({
+            ...prevTask,
+            subtasks: prevTask.subtasks.filter((_, i) => i !== index) // Remove subtask
+        }));
     };
 
     // Validate inputs
@@ -89,7 +112,7 @@ export default function DialogTask({ onClose }) {
             dueDate: '',
             priority: '',
             category: '',
-            subtasks: '',
+            subtasks: [],
             status: 'To Do'
         });
         setErrors({});
@@ -153,14 +176,32 @@ export default function DialogTask({ onClose }) {
                         required
                         error={errors.category}
                     />
-                    <Input
-                        type="text"
-                        label="Subtasks"
-                        name="subtasks"
-                        placeholder="Add new subtask"
-                        value={task.subtasks}
-                        onChange={handleChange}
-                    />
+                    <div className='row-bottom'>
+                        <Input
+                            type="text"
+                            label="Subtasks"
+                            name="subtasks"
+                            placeholder="Add new subtask"
+                            value={subtaskInput}
+                            onChange={(e) => setSubtaskInput(e.target.value)}
+                        />
+                        <Button
+                            style="btn-secondary"
+                            type="button"
+                            label="Add"
+                            onClick={handleAddSubtask}
+                        />
+                    </div>
+                    <ul>
+                        {task.subtasks.map((subtask, index) => (
+                            <li key={index} className="subtask-item">
+                                {subtask}
+                                <button type="button" onClick={() => handleRemoveSubtask(index)}>
+                                    <Trash size={16} />
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
                 <div className='row-right'>
                     <Button

@@ -1,4 +1,8 @@
 import React from 'react';
+// Firebase
+import { doc, deleteDoc } from 'firebase/firestore';
+import { db } from '../../firebase';
+
 // Components
 import IconButton from '../IconButton/IconButton';
 import Chip from '../Chip/Chip';
@@ -8,7 +12,7 @@ import { X, ChevronDown, ChevronUp, Minus } from 'lucide-react';
 // Style
 import './Drawer.css';
 
-export default function Drawer({ task, onClose }) {
+export default function Drawer({ task, onClose, onDelete }) {
   if (!task) return null; // Prevent rendering if no task is selected
 
   // Function to return priority icon
@@ -38,7 +42,21 @@ export default function Drawer({ task, onClose }) {
       default:
         return null;
     }
-  }
+  };
+
+  // Function to handle task deletion
+  const handleDelete = async () => {
+    if (!task.id) return;
+    try {
+      await deleteDoc(doc(db, 'tasks', task.id)); // Delete from Firestore
+      if (onDelete) {
+        onDelete(task.id); // Remove from UI
+      }
+      onClose(); // Close the drawer
+    } catch (error) {
+      console.error('Error deleting task:', error);
+    }
+  };
 
   return (
     <div className='drawer'>
@@ -74,6 +92,10 @@ export default function Drawer({ task, onClose }) {
             <label>Assigned to:</label>
             <p>{task.assignedTo}</p>
           </div>
+          <div className='drawer-attribute'>
+            <label>Subtasks:</label>
+            <p>{task.subtasks}</p>
+          </div>
         </div>
       </div>
 
@@ -85,6 +107,7 @@ export default function Drawer({ task, onClose }) {
         <Button 
           style='btn-secondary'
           label='Delete Task'
+          onClick={handleDelete}
         />
       </div>
     </div>

@@ -44,3 +44,15 @@
     gap: 1rem;
 }
 
+.row-bottom {
+    /* Display & box model */
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    gap: 1rem;
+}
+
+.row-bottom .input-field {
+    /* Display & box model */
+    width: 100%;
+}
