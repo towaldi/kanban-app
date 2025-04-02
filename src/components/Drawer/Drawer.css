@@ -4,7 +4,8 @@
 .drawer-details,
 .drawer-status,
 .drawer-attribute,
-.drawer-actions {
+.drawer-actions,
+.subtask-list {
     /* Display & box model */
     display: flex;
 }
@@ -59,4 +60,11 @@
     flex-direction: row;
     justify-content: flex-end;
     gap: 1rem;
+}
+
+.subtask-list {
+    /* Display & box model */
+    flex-direction: column;
+    /* Other */
+    list-style: none;
 }

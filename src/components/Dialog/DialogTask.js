@@ -7,6 +7,7 @@ import Input from '../Input/Input';
 import Textarea from '../Textarea/Textarea';
 import Select from '../Select/Select';
 import Button from '../Button/Button';
+import IconButton from '../IconButton/IconButton';
 // Icons
 import { Trash } from 'lucide-react';
 // Style
@@ -100,8 +101,9 @@ export default function DialogTask({ onClose }) {
 
         try {
             await addDoc(collection(db, 'tasks'), {
-            ...task,
-            assignedTo: contacts.find(contact => contact.name === task.assignedTo)?.name || ""
+                ...task,
+                assignedTo: contacts.find(contact => contact.name === task.assignedTo)?.name || "",
+                subtasks: Array.isArray(task.subtasks) ? task.subtasks : []
         });
 
         // Reset form fields and errors
@@ -196,9 +198,10 @@ export default function DialogTask({ onClose }) {
                         {task.subtasks.map((subtask, index) => (
                             <li key={index} className="subtask-item">
                                 {subtask}
-                                <button type="button" onClick={() => handleRemoveSubtask(index)}>
-                                    <Trash size={16} />
-                                </button>
+                                <IconButton 
+                                    icon={Trash}
+                                    onClick={() => handleRemoveSubtask(index)}
+                                />
                             </li>
                         ))}
                     </ul>

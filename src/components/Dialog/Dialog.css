@@ -56,3 +56,22 @@
     /* Display & box model */
     width: 100%;
 }
+
+.subtask-item {
+    /* Display & box model */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5rem 1rem;
+    /* Other */
+    border: none;
+    border-radius: .5rem;
+    cursor: pointer;
+    transition: all .1s ease-in-out;
+}
+
+.subtask-item:hover {
+    /* Other */
+    background-color: var(--gray-100);
+}
