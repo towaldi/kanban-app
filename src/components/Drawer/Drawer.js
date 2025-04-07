@@ -95,9 +95,9 @@ export default function Drawer({ task, onClose, onDelete, onEdit }) {
           <div className='drawer-attribute'>
             <label>Subtasks:</label>
             {Array.isArray(task.subtasks) && task.subtasks.length > 0 ? (
-              <ul className="subtask-list">
+              <ul className=".drawer-subtask-list">
                 {task.subtasks.map((subtask, index) => (
-                  <li key={index} className="subtask-item">
+                  <li key={index} className="drawer-subtask-item">
                     {subtask}
                 </li>
                 ))}

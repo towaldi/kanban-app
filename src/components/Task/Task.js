@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 // Components
 import Chip from '../Chip/Chip';
 import IconButton from '../IconButton/IconButton';
 import AvatarContact from '../Avatar/AvatarContact';
-import DialogTask from '../Dialog/DialogTask'; 
 // Icons
-import { Trash, ChevronDown, ChevronUp, Minus, Edit } from 'lucide-react';
+import { Trash, ChevronDown, ChevronUp, Minus } from 'lucide-react';
 // Style
 import './Task.css';
 
-export default function Task({ task, provided, snapshot, onDelete, onSelect, isSelected, onEdit }) {
+export default function Task({ task, provided, snapshot, onDelete, onSelect, isSelected }) {
 
 
     const getPriorityIcon = (priority) => {

@@ -5,7 +5,8 @@
 .drawer-status,
 .drawer-attribute,
 .drawer-actions,
-.subtask-list {
+.subtask-list,
+.drawer-subtask-list {
     /* Display & box model */
     display: flex;
 }
@@ -62,9 +63,17 @@
     gap: 1rem;
 }
 
-.subtask-list {
+.drawer-subtask-list {
     /* Display & box model */
     flex-direction: column;
+    /* Other */
+    list-style: none;
+}
+
+.drawer-subtask-item {
+    /* Display & box model */
+    flex-direction: column;
+    margin-bottom: .5rem;
     /* Other */
     list-style: none;
 }

@@ -44,8 +44,9 @@
   align-items: center;
 }
 
-h1, h2, h3, p, label, .btn, .link, a, option, textarea, .chip, .subtask-list, .subtask-item {
+h1, h2, h3, p, label, .btn, .link, a, option, textarea, .chip, .subtask-list, .drawer-subtask-list .subtask-item, .drawer-subtask-item {
   font-family: 'Inter';
+  list-style: none;
 }
 
 h1 {
@@ -66,7 +67,8 @@ h3 {
   color: var(--gray-900);
 }
 
-p, option, textarea, .subtask-list, .subtask-item {
+p, option, textarea, .subtask-list, .subtask-item, .drawer-subtask-item {
+  font-family: 'Inter';
   font-weight: 400;
   font-size: 1rem;
   color: var(--gray-600);
