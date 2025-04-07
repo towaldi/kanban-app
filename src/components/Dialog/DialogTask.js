@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 // Firebase
 import { db } from '../../firebase';
-import { collection, addDoc, getDocs } from 'firebase/firestore';
+import { collection, addDoc, getDocs, doc, updateDoc } from 'firebase/firestore';
 // Components
 import Input from '../Input/Input';
 import Textarea from '../Textarea/Textarea';
@@ -13,8 +13,8 @@ import { Trash } from 'lucide-react';
 // Style
 import './Dialog.css';
 
-export default function DialogTask({ onClose }) {
-    // Task state
+export default function DialogTask({ onClose, existingTask }) {
+    // Initialiez task state
     const [task, setTask] = useState({
         title: '',
         description: '',
@@ -31,6 +31,25 @@ export default function DialogTask({ onClose }) {
 
     // State for contacts
     const [contacts, setContacts] = useState([]);
+
+    // If editing, pre-fill the inputs
+    useEffect(() => {
+        if (existingTask) {
+          setTask(existingTask);
+        } else {
+          // Reset the form when creating a new task
+          setTask({
+            title: '',
+            description: '',
+            assignedTo: '',
+            dueDate: '',
+            priority: '',
+            category: '',
+            subtasks: [],
+            status: 'To Do'
+          });
+        }
+    }, [existingTask]);
 
     // Fetch contacts from Firestore
     useEffect(() => {
@@ -70,6 +89,8 @@ export default function DialogTask({ onClose }) {
         }
     };
 
+    
+
     // Handle removing subtasks
     const handleRemoveSubtask = (index) => {
         setTask((prevTask) => ({
@@ -94,33 +115,28 @@ export default function DialogTask({ onClose }) {
     // Submit form and add task to Firebase
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         if (!validateInputs()) {
-        return;
+            return;
         }
-
+    
         try {
-            await addDoc(collection(db, 'tasks'), {
-                ...task,
-                assignedTo: contacts.find(contact => contact.name === task.assignedTo)?.name || "",
-                subtasks: Array.isArray(task.subtasks) ? task.subtasks : []
-        });
-
-        // Reset form fields and errors
-        setTask({
-            title: '',
-            description: '',
-            assignedTo: '',
-            dueDate: '',
-            priority: '',
-            category: '',
-            subtasks: [],
-            status: 'To Do'
-        });
-        setErrors({});
-        onClose(); // Close dialog after submission
+            if (existingTask) {
+                // UPDATE EXISTING TASK
+                const taskRef = doc(db, 'tasks', existingTask.id);
+                await updateDoc(taskRef, { ...task });
+            } else {
+                // CREATE NEW TASK
+                await addDoc(collection(db, 'tasks'), {
+                    ...task,
+                    assignedTo: contacts.find(contact => contact.name === task.assignedTo)?.name || "",
+                    subtasks: Array.isArray(task.subtasks) ? task.subtasks : []
+                });
+            }
+    
+            onClose(); // Close dialog after submission
         } catch (error) {
-            console.error("Error adding task:", error);
+            console.error("Error saving task:", error);
         }
     };
 
@@ -216,7 +232,7 @@ export default function DialogTask({ onClose }) {
                     <Button
                         style='btn-primary'
                         type='submit'
-                        label='Add Task'
+                        label={existingTask ? 'Update Task' : 'Add Task'}
                     />
                 </div>
             </form>

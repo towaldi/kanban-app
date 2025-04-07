@@ -3,12 +3,14 @@ import React, { useState } from 'react';
 import Chip from '../Chip/Chip';
 import IconButton from '../IconButton/IconButton';
 import AvatarContact from '../Avatar/AvatarContact';
+import DialogTask from '../Dialog/DialogTask'; 
 // Icons
-import { Trash, ChevronDown, ChevronUp, Minus } from 'lucide-react';
+import { Trash, ChevronDown, ChevronUp, Minus, Edit } from 'lucide-react';
 // Style
 import './Task.css';
 
-export default function Task({ task, provided, snapshot, onDelete, onSelect, isSelected }) {
+export default function Task({ task, provided, snapshot, onDelete, onSelect, isSelected, onEdit }) {
+
 
     const getPriorityIcon = (priority) => {
         switch (priority) {
@@ -20,6 +22,7 @@ export default function Task({ task, provided, snapshot, onDelete, onSelect, isS
     };
 
     return (
+        <>
         <div
             ref={provided.innerRef}
             {...provided.draggableProps}
@@ -40,6 +43,7 @@ export default function Task({ task, provided, snapshot, onDelete, onSelect, isS
             {task.category && <Chip label={task.category} />}
             <p>{task.description}</p>
             <p>Due: {task.dueDate}</p>
+            
             <div className='task-row'>
                 <p>{getPriorityIcon(task.priority)}</p>
                 {task.assignedTo ? (
@@ -49,5 +53,6 @@ export default function Task({ task, provided, snapshot, onDelete, onSelect, isS
                 )}
             </div>
         </div>
+    </>
     );
 }

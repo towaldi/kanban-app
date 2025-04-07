@@ -49,6 +49,7 @@
 .task-row {
     /* Display & box model */
     display: flex;
+    flex-direction: row;
     margin-top: 1rem;
 }
 

@@ -14,6 +14,12 @@ export default function Board() {
   const [tasks, setTasks] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleEditTask = (task) => {
+    setSelectedTask(task);
+    setIsDialogOpen(true);
+  };
 
   useEffect(() => {
     // Real-time listener for tasks form Firestore
@@ -75,7 +81,10 @@ export default function Board() {
           <Button 
             style="btn-primary" 
             label="Add Task"
-            onClick={() => setIsDialogOpen(true)} // Open 'DialogTask'
+            onClick={() => {
+              setSelectedTask(null); // Ensure no previous task is prefilled
+              setIsDialogOpen(true); // Open 'DialogTask'
+            }}
           />
         </div>
         <DragDropContext onDragEnd={handleDragEnd}>
@@ -110,8 +119,20 @@ export default function Board() {
           </div>
         </DragDropContext>
       </div>
-      {selectedTask && <Drawer task={selectedTask} onClose={() => setSelectedTask(null)} />}
-      {isDialogOpen && <DialogTask onClose={() => setIsDialogOpen(false)} />}
+      {selectedTask && <Drawer 
+        task={selectedTask} 
+        onClose={() => setSelectedTask(null)}
+        onEdit={handleEditTask}
+      />}
+      {isDialogOpen && (
+        <DialogTask 
+          onClose={() => {
+            setIsDialogOpen(false);
+            setSelectedTask(null);
+          }}
+    existingTask={selectedTask} 
+  />
+)}
     </div>
   );
 }

@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
     "@hello-pangea/dnd": "^17.0.0",
+    "@mui/material": "^7.0.1",
     "cra-template": "1.2.0",
     "firebase": "^11.1.0",
     "lucide-react": "^0.473.0",

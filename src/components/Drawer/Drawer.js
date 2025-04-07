@@ -12,7 +12,7 @@ import { X, ChevronDown, ChevronUp, Minus } from 'lucide-react';
 // Style
 import './Drawer.css';
 
-export default function Drawer({ task, onClose, onDelete }) {
+export default function Drawer({ task, onClose, onDelete, onEdit }) {
   if (!task) return null; // Prevent rendering if no task is selected
 
   // Function to return priority icon
@@ -113,6 +113,7 @@ export default function Drawer({ task, onClose, onDelete }) {
         <Button 
           style='btn-secondary'
           label='Edit Task'
+          onClick={() => onEdit(task)}
         />
         <Button 
           style='btn-secondary'
