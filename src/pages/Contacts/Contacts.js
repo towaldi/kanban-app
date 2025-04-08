@@ -109,12 +109,13 @@ export default function Contacts() {
           onSelectContact={setSelectedContact} 
           contacts={contacts}
         />
-        {selectedContact && 
-          <ContactDetails 
-            {...selectedContact}
-            onDelete={() => deleteContactFromFirestore(selectedContact.id)}
-            onEdit={() => openEditDialog(selectedContact)} // Pass function to open edit dialog
-        />}
+        <ContactDetails 
+          name={selectedContact?.name || ''}
+          email={selectedContact?.email || ''}
+          phone={selectedContact?.phone || ''}
+          onDelete={selectedContact ? () => deleteContactFromFirestore(selectedContact.id) : null}
+          onEdit={selectedContact ? () => openEditDialog(selectedContact) : null}
+        />
         {isDialogOpen && (
           <DialogContact 
             onClose={() => setIsDialogOpen(false)} 

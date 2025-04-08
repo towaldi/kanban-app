@@ -6,6 +6,20 @@ import Button from '../Button/Button';
 import './ContactDetails.css';
 
 export default function ContactDetails({ name, email, phone, onDelete, onEdit }) {
+    
+    if (!name && !email && !phone) {
+        return (
+          <div className="contact-details empty">
+            <div className="contact-content">
+              <div className="contact-header">
+                <h2>No Contact Selected</h2>
+                <p>Select a contact to view details.</p>
+              </div>
+            </div>
+          </div>
+        );
+    }
+
     return (
         <div className='contact-details'>
             <div className='contact-content'>
