@@ -1,4 +1,5 @@
 import React from 'react';
+import { getAuth } from 'firebase/auth';
 // Components
 import Avatar from '../Avatar/Avatar';
 import IconButton from '../IconButton/IconButton';
@@ -13,6 +14,11 @@ export default function Appbar({ toggleNavbar, isNavbarVisible }) {
   // Determine the icon based on navbar state
   const icon = isNavbarVisible ? PanelLeftClose : PanelRightClose;
 
+  // Get the current user
+  const auth = getAuth();
+  const user = auth.currentUser;
+  const email = user?.email || "";
+
 
   return (
     <div className='app-bar'>
@@ -23,7 +29,7 @@ export default function Appbar({ toggleNavbar, isNavbarVisible }) {
           icon={icon}
         />
       </div>
-      <Avatar />
+      <Avatar email={email}/>
     </div>
   )
 }
