@@ -46,6 +46,12 @@ export default function SignIn({ showSnackbar }) {
             setPassword("");
             navigate("/summary");
         } catch (error) {
+            // Show user-friendly error in snackbar
+            showSnackbar("Wrong email and/or password. Please retry.");
+            // Clear input fields
+            setEmail("");
+            setPassword("");
+            // Optionally keep technical error for debugging (not shown to user)
             setError(error.message);
         }
     }; 
@@ -63,8 +69,11 @@ export default function SignIn({ showSnackbar }) {
                         type="text"
                         placeholder="Enter your email"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        validate={validateEmail}    // Pass validation function to Input
+                        onChange={(e) => {
+                            setEmail(e.target.value);
+                            setError("");
+                        }}
+                        validate={validateEmail}
                         required
                     />
                     <Input
@@ -72,8 +81,11 @@ export default function SignIn({ showSnackbar }) {
                         type="password"
                         placeholder="Enter your password"
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        validate={validatePassword} // Pass validation function to Input
+                        onChange={(e) => {
+                            setPassword(e.target.value);
+                            setError("");
+                        }}
+                        validate={validatePassword}
                         required
                     />
                     <label className="remember-me">
