@@ -20,7 +20,7 @@ const validatePassword = (password) => {
     return "";
 };
 
-export default function SignUp() {
+export default function SignUp({ showSnackbar }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -43,7 +43,7 @@ export default function SignUp() {
         try {
             await createUserWithEmailAndPassword(auth, email, password);
             await signOut(auth); // Immediately sign out the newly created user
-            alert("Account created successfully! Please sign in.")
+            showSnackbar("Account created successfully! Please sign in.");
             setEmail("");
             setPassword("");
             navigate("/");  // Navigate to the SignIn page

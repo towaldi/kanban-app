@@ -20,7 +20,7 @@ const validatePassword = (password) => {
     return "";
 };
 
-export default function SignIn() {
+export default function SignIn({ showSnackbar }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -41,7 +41,7 @@ export default function SignIn() {
 
         try {
             await signInWithEmailAndPassword(auth, email, password);
-            alert("User successfully logged in!");
+            showSnackbar("User successfully logged in!");
             setEmail("");
             setPassword("");
             navigate("/summary");

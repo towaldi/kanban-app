@@ -80,8 +80,8 @@ export default function App() {
         {/* Unauthenticated users only see SignIn/SignUp */}
         {!isAuthenticated && (
           <Routes>
-            <Route path="/" element={<SignIn />} />
-            <Route path="/signup" element={<SignUp />} />
+            <Route path="/" element={<SignIn showSnackbar={showSnackbar} />} />
+            <Route path="/signup" element={<SignUp showSnackbar={showSnackbar} />} />
           </Routes>
         )}
       </div>
