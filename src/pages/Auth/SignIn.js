@@ -102,6 +102,9 @@ export default function SignIn({ showSnackbar }) {
                     <p className="body-small">Don't have an account?
                         <Link to="/signup" className="link"> Sign up</Link>
                     </p>
+                    <p className="body-small">Test Account: <br />Email: thorsten.test@test.com <br />Password: test123
+                    
+                    </p>
                 </form>
             </div>
         </div>
