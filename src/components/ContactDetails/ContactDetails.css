@@ -49,3 +49,15 @@
     /* Display & box model */
     justify-content: flex-end;
 }
+
+
+@media screen and (max-width: 1260px) {
+    .contact-img {
+        /* Display & box model */
+        height: 6rem;
+        width: 100%;
+        /* Other */
+        background-image: linear-gradient(to bottom, var(--brand-300), var(--brand-500));
+        border-radius: .5rem .5rem 0 0;
+    }
+}

@@ -12,10 +12,10 @@ export default function LegalNotice() {
         <div className='section'>
           <h2>Imprint</h2>
           <ul>
-            <li>Name</li>
-            <li>Address</li>
-            <li>Postcode & City</li>
-            <li>E-mail</li>
+            <li>Tobias Walddörfer</li>
+            <li>Säntisstraße 19</li>
+            <li>88099 Neukirch</li>
+            <li>tobias.walddoerfer@gmail.com</li>
           </ul>
         </div>
         <div className='section'>

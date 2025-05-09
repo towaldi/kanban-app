@@ -18,3 +18,19 @@
     flex-direction: row;
     padding: 1rem;
 }
+
+@media screen and (max-width: 1260px) {
+    .contact-list {
+        /* Display & box model */
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        overflow-y: auto;
+        padding: 1rem;
+        /* Other */
+        background-color: var(--color-white);
+        border: .063rem solid var(--gray-100);
+        border-radius: .5rem;
+    }
+}

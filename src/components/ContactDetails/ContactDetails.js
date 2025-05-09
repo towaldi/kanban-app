@@ -11,10 +11,13 @@ export default function ContactDetails({ name, email, phone, onDelete, onEdit })
         return (
           <div className="contact-details empty">
             <div className="contact-content">
-              <div className="contact-header">
-                <h2>No Contact Selected</h2>
-                <p>Select a contact to view details.</p>
-              </div>
+                <div className='contact-img'></div>
+                <div className="contact-header">
+                    <h2>No Contact Selected</h2>
+                </div>
+                <div className='contact-infos'>
+                    <p>Select a contact to view details.</p>
+                </div>
             </div>
           </div>
         );
