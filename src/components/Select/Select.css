@@ -17,7 +17,7 @@
     border-radius: 0.5rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 
                 0 1px 2px rgba(0, 0, 0, 0.12);
-    color: var(--gray-300);
+    color: var(--gray-900);
     cursor: pointer;
     transition: border 0.2s ease-in-out;
     outline: none;
@@ -27,6 +27,11 @@
     background-repeat: no-repeat;
     background-position: right 1rem center;
     background-size: 1rem;
+}
+
+.select select option[value=""] {
+    /* Other */
+    color: var(--gray-300);
 }
 
 /* Hover Effect */
